@@ -12,7 +12,11 @@ config_version=5
 
 config/name="Do Not Mind Me"
 config/features=PackedStringArray("4.1", "Mobile")
-config/icon="res://icon.svg"
+config/icon="res://Assets/images/survivor1_gun.png"
+
+[display]
+
+window/stretch/mode="viewport"
 
 [rendering]
 
