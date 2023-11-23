@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf1npb4047ryu"]
+
+[ext_resource type="Texture2D" uid="uid://l80tsf06qnac" path="res://Assets/images/waypoint.png" id="1_wulnk"]
+
+[node name="Waypoint" type="Marker2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_wulnk")

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl7av4t3pskkw"]
+
+[ext_resource type="Script" path="res://Project/NPC/npc.gd" id="1_p3vc5"]
+[ext_resource type="Texture2D" uid="uid://88grd070lxnl" path="res://Assets/images/soldier1_gun.png" id="1_tibq5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lw457"]
+radius = 8.0
+height = 22.0
+
+[node name="NPC" type="CharacterBody2D"]
+script = ExtResource("1_p3vc5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_tibq5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6, 0)
+shape = SubResource("CapsuleShape2D_lw457")
+
+[node name="NavAgent" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+max_speed = 300.0
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+
+[connection signal="velocity_computed" from="NavAgent" to="." method="_on_nav_agent_velocity_computed"]

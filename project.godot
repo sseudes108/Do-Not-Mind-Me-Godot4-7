@@ -11,12 +11,23 @@ config_version=5
 [application]
 
 config/name="Do Not Mind Me"
+run/main_scene="res://Project/LevelMap/LevelMap.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://Assets/images/survivor1_gun.png"
 
 [display]
 
+window/size/viewport_width=1024
+window/size/viewport_height=768
 window/stretch/mode="viewport"
+
+[input]
+
+"Target Location"={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(90, 9),"global_position":Vector2(94, 52),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
 
 [rendering]
 
