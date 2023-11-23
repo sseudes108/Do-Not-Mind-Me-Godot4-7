@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://b2ke42e2ekefx"]
+[gd_scene load_steps=14 format=3 uid="uid://b2ke42e2ekefx"]
 
 [ext_resource type="Texture2D" uid="uid://ci67u6lc25ksk" path="res://Assets/spritesheets/grass.png" id="1_h5rsb"]
 [ext_resource type="Texture2D" uid="uid://bhyhkg68k13by" path="res://Assets/spritesheets/concrete.png" id="2_8vs2m"]
 [ext_resource type="Texture2D" uid="uid://ctumoeugoyh8" path="res://Assets/spritesheets/floor.png" id="3_th3w2"]
 [ext_resource type="Texture2D" uid="uid://bceai1bvilceo" path="res://Assets/spritesheets/walls.png" id="4_ljmjt"]
 [ext_resource type="PackedScene" uid="uid://cl7av4t3pskkw" path="res://Project/NPC/npc.tscn" id="5_ife6f"]
+[ext_resource type="PackedScene" uid="uid://c1fmfdns78y0y" path="res://Project/Player/Player.tscn" id="6_b21es"]
 [ext_resource type="PackedScene" uid="uid://bf1npb4047ryu" path="res://Project/Waypoint/waypoint.tscn" id="6_w47b0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kjb6c"]
@@ -306,6 +307,9 @@ position = Vector2(670, 435)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_4iat2")
+
+[node name="Player" parent="." instance=ExtResource("6_b21es")]
+position = Vector2(617, 307)
 
 [node name="PatrolPaths" type="Node2D" parent="."]
 

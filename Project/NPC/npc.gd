@@ -1,17 +1,21 @@
 extends CharacterBody2D
 
+@onready var sprite = $Sprite2D
 enum ENEMY_STATE {PATROLLING, CHASING, SEARCHING}
+var state: ENEMY_STATE = ENEMY_STATE.PATROLLING
 
 @export var patrolPoints: NodePath
-
 var wayPoints: Array = []
 var currentWayPoint : int = 0
-var state: ENEMY_STATE = ENEMY_STATE.PATROLLING
 
 @onready var navAgent = $NavAgent
 var speed: float = 216
 
+var player: Player
+@onready var playerDetection = $PlayerDetection
+
 func _ready():
+	player = get_tree().get_first_node_in_group("Player")
 	createWayPoints()
 
 func _physics_process(delta):
@@ -19,11 +23,16 @@ func _physics_process(delta):
 	#	navAgent.target_position = get_global_mouse_position()
 	updateState()
 	
+	rayCastToPlayer()
+	
 	#Sincroniza o mapa que é apenas atualizado no fim de physics_process corrigindo o erro abaixo:
 	#NavigationServer map query failed because it was made before first map synchronization
 	await get_tree().process_frame
 	
 	updateNavigation()
+
+func rayCastToPlayer():
+	playerDetection.look_at(player.global_position)
 
 func createWayPoints():
 	for point in get_node(patrolPoints).get_children():
@@ -38,6 +47,9 @@ func navigateToNextWayPoint():
 func updateNavigation():
 	var nextPosition = navAgent.get_next_path_position()
 	var inicialVelocity = (nextPosition - global_position).normalized() * speed
+	
+	sprite.look_at(nextPosition)
+	
 	navAgent.set_velocity(inicialVelocity)
 
 func patrollingState():
