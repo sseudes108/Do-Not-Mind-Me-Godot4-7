@@ -9,7 +9,7 @@ var wayPoints: Array = []
 var currentWayPoint : int = 0
 
 @onready var navAgent = $NavAgent
-var speed: float = 216
+var speed: float = 108
 
 var player: Player
 @onready var playerDetection = $PlayerDetection
@@ -22,7 +22,6 @@ func _physics_process(delta):
 	#if Input.is_action_just_pressed("Target Location") == true:
 	#	navAgent.target_position = get_global_mouse_position()
 	updateState()
-	
 	rayCastToPlayer()
 	
 	#Sincroniza o mapa que é apenas atualizado no fim de physics_process corrigindo o erro abaixo:
@@ -30,9 +29,19 @@ func _physics_process(delta):
 	await get_tree().process_frame
 	
 	updateNavigation()
+	updateDebugLabel()
+
+func updateDebugLabel():
+	var string = "FOV:%.0f" % getFovToPlayer()
+	SignalManager.debugLabel.emit(string)
 
 func rayCastToPlayer():
 	playerDetection.look_at(player.global_position)
+
+func getFovToPlayer() -> float:
+	var direction = global_position.direction_to(player.global_position)
+	var dotProduct = direction.dot(velocity.normalized())
+	return rad_to_deg(acos(dotProduct))
 
 func createWayPoints():
 	for point in get_node(patrolPoints).get_children():

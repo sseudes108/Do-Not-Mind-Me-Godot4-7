@@ -1,7 +1,1 @@
-res://Project/LevelMap/LevelMap.tscn
 res://Project/NPC/npc.tscn
-res://Project/NPC/npc.gd
-res://Project/Waypoint/waypoint.tscn
-res://Project/Player/Player.tscn
-res://Project/Player/Player.gd
-res://Project/NPC/Teste.gd

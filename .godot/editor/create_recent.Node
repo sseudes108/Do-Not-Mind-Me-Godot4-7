@@ -1,3 +1,5 @@
+Label
+ColorRect
 CollisionShape2D
 Sprite2D
 CharacterBody2D

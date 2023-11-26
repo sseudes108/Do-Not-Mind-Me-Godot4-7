@@ -1,6 +1,6 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1700740152
-README.md::TextFile::-1::1700700441::0::1::::<><>::
+::res://::1700854844
+README.md::TextFile::-1::1700749411::0::1::::<><>::
 ::res://Assets/::1700700503
 ::res://Assets/fonts/::1700700503
 gemunu-libre-v8-latin-700.ttf::FontFile::9071291049346903572::1700700502::1700700503::1::::<><>::
@@ -39,4 +39,17 @@ grass.png::CompressedTexture2D::5400328131857785270::1700700503::1700700504::1::
 objects.png::CompressedTexture2D::5666051473681808406::1700700503::1700700504::1::::<><>::
 playeholder_tiles_64.png::CompressedTexture2D::5651683013430014759::1700700503::1700700504::1::::<><>::
 walls.png::CompressedTexture2D::2535071536453821654::1700700503::1700700504::1::::<><>::
-::res://Project/::1700700491
+::res://Project/::1700826732
+::res://Project/LevelMap/::1700829451
+LevelMap.gd::GDScript::-1::1700828161::0::1::::<>Node2D<>::
+LevelMap.tscn::PackedScene::4302459320997052225::1700829451::0::1::::<><>::uid://ci67u6lc25ksk::::res://Assets/spritesheets/grass.png<>res://Project/LevelMap/LevelMap.gd<>uid://bhyhkg68k13by::::res://Assets/spritesheets/concrete.png<>uid://ctumoeugoyh8::::res://Assets/spritesheets/floor.png<>uid://bceai1bvilceo::::res://Assets/spritesheets/walls.png<>uid://cl7av4t3pskkw::::res://Project/NPC/npc.tscn<>uid://c1fmfdns78y0y::::res://Project/Player/Player.tscn<>uid://bf1npb4047ryu::::res://Project/Waypoint/waypoint.tscn
+::res://Project/NPC/::1700829482
+npc.gd::GDScript::-1::1700829480::0::1::::<>CharacterBody2D<>::
+npc.tscn::PackedScene::5611017791027868370::1700829482::0::1::::<><>::res://Project/NPC/npc.gd<>uid://88grd070lxnl::::res://Assets/images/soldier1_gun.png
+::res://Project/Player/::1700829452
+Player.gd::GDScript::-1::1700829079::0::1::::Player<>CharacterBody2D<>::
+Player.tscn::PackedScene::6608810902142498898::1700829452::0::1::::<><>::res://Project/Player/Player.gd<>uid://c7g6780btnxin::::res://Assets/images/survivor1_gun.png
+::res://Project/Singletons/::1700826850
+SignalManager.gd::GDScript::-1::1700826850::0::1::::<>Node<>::
+::res://Project/Waypoint/::1700763374
+waypoint.tscn::PackedScene::2791854929801950392::1700763374::0::1::::<><>::uid://l80tsf06qnac

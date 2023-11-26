@@ -1,12 +1,23 @@
 extends CharacterBody2D
 
 class_name Player
+var moveSpeed: float = 99
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass 
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	getInput()
+	rotatePlayer()
+	move_and_slide()
+
+func getInput():
+	var newVelocity = Vector2(
+		Input.get_action_strength("Right") - Input.get_action_strength("Left"),
+		Input.get_action_strength("Down") - Input.get_action_strength("Up")
+		)
+	velocity = newVelocity.normalized() * moveSpeed
+
+func rotatePlayer():
+	if velocity.x !=0 or velocity.y !=0:
+		rotation = velocity.angle()

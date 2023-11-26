@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://b2ke42e2ekefx"]
+[gd_scene load_steps=15 format=3 uid="uid://b2ke42e2ekefx"]
 
 [ext_resource type="Texture2D" uid="uid://ci67u6lc25ksk" path="res://Assets/spritesheets/grass.png" id="1_h5rsb"]
+[ext_resource type="Script" path="res://Project/LevelMap/LevelMap.gd" id="1_m17yy"]
 [ext_resource type="Texture2D" uid="uid://bhyhkg68k13by" path="res://Assets/spritesheets/concrete.png" id="2_8vs2m"]
 [ext_resource type="Texture2D" uid="uid://ctumoeugoyh8" path="res://Assets/spritesheets/floor.png" id="3_th3w2"]
 [ext_resource type="Texture2D" uid="uid://bceai1bvilceo" path="res://Assets/spritesheets/walls.png" id="4_ljmjt"]
@@ -269,6 +270,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 outlines = Array[PackedVector2Array]([PackedVector2Array(168, 172, 327, 181, 360, 478, 523, 456, 525, 181, 765, 193, 796, 423, 1178, 416, 1183, 175, 980, 177, 971, 271, 1027, 291, 912, 304, 907, 152, 2373, 156, 2379, 476, 2443, 476, 2443, 801, 2254, 808, 2254, 931, 1798, 934, 1810, 1228, 1940, 1227, 1938, 1064, 2243, 1061, 2250, 1255, 880, 1261, 853, 1210, 808, 1169, 787, 1129, 406, 1109, 384, 1169, 249, 1167, 242, 949, 375, 954, 408, 1066, 543, 1055, 536, 802, 235, 801, 224, 722, 170, 702, 151, 478, 276, 470, 280, 341, 191, 321), PackedVector2Array(416, 498, 505, 486, 919, 487, 910, 722, 413, 729), PackedVector2Array(1293, 354, 1286, 480, 1585, 507, 1591, 653, 1454, 657, 1441, 547, 1286, 536, 1297, 799, 1744, 799, 1739, 361), PackedVector2Array(1867, 489, 2109, 495, 2115, 594, 2003, 613, 2009, 677, 2113, 683, 2129, 795, 1859, 791), PackedVector2Array(911, 850, 1428, 853, 1443, 1185, 1163, 1194, 1156, 1064, 1275, 1055, 1257, 996, 1066, 1003, 1077, 1187, 925, 1192)])
 
 [node name="LevelMap" type="Node2D"]
+script = ExtResource("1_m17yy")
 
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2(0.989918, 1)
@@ -304,6 +306,21 @@ patrolPoints = NodePath("../PatrolPaths/Path1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(670, 435)
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D"]
+offset_left = -503.0
+offset_top = -378.0
+offset_right = -253.0
+offset_bottom = -228.0
+color = Color(0, 0, 0.411765, 1)
+
+[node name="Label" type="Label" parent="Camera2D/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_4iat2")
