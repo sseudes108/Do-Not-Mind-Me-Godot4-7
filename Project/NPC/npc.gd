@@ -13,6 +13,13 @@ var speed: float = 108
 
 var player: Player
 @onready var playerDetection = $PlayerDetection
+@onready var rayCast = $PlayerDetection/RayCast2D
+
+const FOV = {
+	ENEMY_STATE.PATROLLING: 60.0,
+	ENEMY_STATE.CHASING: 120.0,
+	ENEMY_STATE.SEARCHING: 100.0,
+}
 
 func _ready():
 	player = get_tree().get_first_node_in_group("Player")
@@ -32,17 +39,38 @@ func _physics_process(delta):
 	updateDebugLabel()
 
 func updateDebugLabel():
-	var string = "FOV:%.0f" % getFovToPlayer()
+	var string = "FOV:%.0f\n" % getFovToPlayer()
+	string += "PlayerDetected: %s\n" % playerDetected()
+	string += "PlayerInFov: %s\n" % playerInFov()
+	string += "canSeePlayer: %s\n" % canSeePlayer()
+	
 	SignalManager.debugLabel.emit(string)
 
+#####DETECTION######
 func rayCastToPlayer():
 	playerDetection.look_at(player.global_position)
 
 func getFovToPlayer() -> float:
 	var direction = global_position.direction_to(player.global_position)
 	var dotProduct = direction.dot(velocity.normalized())
-	return rad_to_deg(acos(dotProduct))
+	if dotProduct >= -1.0 and dotProduct <= 1.0:
+		return rad_to_deg(acos(dotProduct))
+	else:
+		return 0.0
 
+func playerDetected() -> bool:
+	var detected = rayCast.get_collider()
+	if detected != null:
+		return detected.is_in_group("Player")
+	return false
+
+func playerInFov() -> bool:
+	return getFovToPlayer() < FOV[state]
+
+func canSeePlayer() -> bool:
+	return playerInFov() and playerDetected()
+
+#####MOVE POINTS#####
 func createWayPoints():
 	for point in get_node(patrolPoints).get_children():
 		wayPoints.append(point.global_position)
@@ -61,6 +89,7 @@ func updateNavigation():
 	
 	navAgent.set_velocity(inicialVelocity)
 
+#####STATES#####
 func patrollingState():
 	if navAgent.is_navigation_finished() == true:
 		navigateToNextWayPoint()
