@@ -28,18 +28,19 @@ func _ready():
 func _physics_process(delta):
 	#if Input.is_action_just_pressed("Target Location") == true:
 	#	navAgent.target_position = get_global_mouse_position()
-	updateState()
 	rayCastToPlayer()
+	updateMovement()
 	
 	#Sincroniza o mapa que é apenas atualizado no fim de physics_process corrigindo o erro abaixo:
 	#NavigationServer map query failed because it was made before first map synchronization
 	await get_tree().process_frame
 	
 	updateNavigation()
+	UpdateState()
 	updateDebugLabel()
 
 func updateDebugLabel():
-	var string = "FOV:%.0f\n" % getFovToPlayer()
+	var string = "FOV:%.0f - State:%s\n" % [getFovToPlayer(), ENEMY_STATE.keys()[state]]
 	string += "PlayerDetected: %s\n" % playerDetected()
 	string += "PlayerInFov: %s\n" % playerInFov()
 	string += "canSeePlayer: %s\n" % canSeePlayer()
@@ -90,14 +91,53 @@ func updateNavigation():
 	navAgent.set_velocity(inicialVelocity)
 
 #####STATES#####
-func patrollingState():
+func processPatrollingState():
 	if navAgent.is_navigation_finished() == true:
 		navigateToNextWayPoint()
 
-func updateState():
+func processSearchingState():
+	if navAgent.is_navigation_finished() == true:
+		setState(ENEMY_STATE.PATROLLING)
+
+func processChasingState():
+	navigateToPlayer()
+
+func updateMovement():
 	match state:
 		ENEMY_STATE.PATROLLING:
-			patrollingState()
+			processPatrollingState()
+		ENEMY_STATE.CHASING:
+			processSearchingState()
+		ENEMY_STATE.CHASING:
+			processChasingState()
+
+##CHASE AND SEARCH##
+func navigateToPlayer():
+	navAgent.target_position = player.global_position
+
+##STATE UPDATE
+func setState(newState: ENEMY_STATE):
+	if newState == state:
+		return
+	state == newState
+	match state:
+		ENEMY_STATE.PATROLLING:
+			navigateToNextWayPoint()
+		ENEMY_STATE.SEARCHING:
+			navigateToPlayer()
+		ENEMY_STATE.CHASING:
+			pass
+
+func UpdateState():
+	var newState = state
+	var canSee = canSeePlayer()
+	
+	if canSee:
+		newState = ENEMY_STATE.CHASING
+	elif newState == ENEMY_STATE.CHASING and !canSee:
+		newState = ENEMY_STATE.SEARCHING
+	
+	setState(newState)
 
 func _on_nav_agent_velocity_computed(safe_velocity):
 	velocity = safe_velocity
