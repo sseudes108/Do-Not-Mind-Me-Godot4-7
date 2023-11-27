@@ -1,4 +1,8 @@
-res://Project/NPC/npc.tscn
-res://Project/NPC/npc.gd
 res://Project/LevelMap/LevelMap.tscn
+res://Project/NPC/npc.tscn
 res://Project/Player/Player.tscn
+res://Project/NPC/npc.gd
+res://Project/Player/Player.gd
+res://Project/Singletons/SoundManager.gd
+res://Project/Bullet/Bullet.tscn
+res://Project/Bullet/Bullet.gd

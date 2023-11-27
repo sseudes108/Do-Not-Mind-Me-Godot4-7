@@ -15,6 +15,13 @@ var player: Player
 @onready var playerDetection = $PlayerDetection
 @onready var rayCast = $PlayerDetection/RayCast2D
 
+@onready var sound = $Sound
+@onready var animationPlayer = $AnimationPlayer
+
+
+var bulletScene: PackedScene = preload("res://Project/Bullet/Bullet.tscn")
+@onready var shootTimer = $ShootTimer
+
 const FOV = {
 	ENEMY_STATE.PATROLLING: 60.0,
 	ENEMY_STATE.CHASING: 120.0,
@@ -35,8 +42,8 @@ func _physics_process(delta):
 	#NavigationServer map query failed because it was made before first map synchronization
 	await get_tree().process_frame
 	
-	updateNavigation()
 	UpdateState()
+	updateNavigation()
 	updateDebugLabel()
 
 func updateDebugLabel():
@@ -69,7 +76,10 @@ func playerInFov() -> bool:
 	return getFovToPlayer() < FOV[state]
 
 func canSeePlayer() -> bool:
-	return playerInFov() and playerDetected()
+	if playerInFov() and playerDetected():
+		return true
+	else:
+		return false
 
 #####MOVE POINTS#####
 func createWayPoints():
@@ -106,7 +116,7 @@ func updateMovement():
 	match state:
 		ENEMY_STATE.PATROLLING:
 			processPatrollingState()
-		ENEMY_STATE.CHASING:
+		ENEMY_STATE.SEARCHING:
 			processSearchingState()
 		ENEMY_STATE.CHASING:
 			processChasingState()
@@ -119,14 +129,20 @@ func navigateToPlayer():
 func setState(newState: ENEMY_STATE):
 	if newState == state:
 		return
-	state == newState
+	
+	if state != ENEMY_STATE.SEARCHING and newState == ENEMY_STATE.CHASING:
+		SoundManager.playGasp(sound)
+	
+	state = newState
 	match state:
 		ENEMY_STATE.PATROLLING:
+			animationPlayer.play("RESET")
 			navigateToNextWayPoint()
 		ENEMY_STATE.SEARCHING:
 			navigateToPlayer()
 		ENEMY_STATE.CHASING:
-			pass
+			shootTimer.start()
+			animationPlayer.play("Alert")
 
 func UpdateState():
 	var newState = state
@@ -142,3 +158,13 @@ func UpdateState():
 func _on_nav_agent_velocity_computed(safe_velocity):
 	velocity = safe_velocity
 	move_and_slide()
+
+func shoot():
+	if state != ENEMY_STATE.CHASING:
+		return
+	var bullet = bulletScene.instantiate()
+	bullet.init(player.global_position, global_position)
+	get_tree().root.add_child(bullet)
+
+func _on_shoot_timeout():
+	shoot()

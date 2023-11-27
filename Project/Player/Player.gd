@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 class_name Player
-var moveSpeed: float = 99
+var moveSpeed: float = 324
 
 func _ready():
 	pass 
