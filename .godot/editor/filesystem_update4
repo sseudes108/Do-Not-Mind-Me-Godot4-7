@@ -14,3 +14,7 @@ res://Project/GameUi/GameUi.tscn
 res://Project/GameUi/GameUi.gd
 res://Project/Exit/Exit.tscn
 res://Project/Exit/Exit.gd
+res://Project/Main/Main.tscn
+res://Project/Main/Main.gd
+res://Project/Singletons/GameManager.gd
+res://Project/Player/Player.gd

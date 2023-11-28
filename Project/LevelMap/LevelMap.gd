@@ -6,7 +6,6 @@ extends Node2D
 @onready var sound = $Sound
 @onready var gameUi = $CanvasLayer/GameUI
 
-
 var pickUps: int = 0
 var collected: int = 0
 
@@ -22,6 +21,8 @@ func _ready():
 func _process(delta):
 	camera.global_position = player.global_position
 	gameUi.updatePickUpsCount(collected,pickUps)
+	if Input.is_key_pressed(KEY_ESCAPE) == true:
+		GameManager.loadLMainScene()
 
 func updateDebugLabel(text: String):
 	debugLabel.text = text

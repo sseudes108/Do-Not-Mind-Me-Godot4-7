@@ -1,15 +1,15 @@
+Label
+ColorRect
 CollisionShape2D
 Sprite2D
 Area2D
 CanvasLayer
-Label
 HBoxContainer
 MarginContainer
 AudioStreamPlayer2D
 AnimationPlayer
 Timer
 AnimatedSprite2D
-ColorRect
 CharacterBody2D
 RayCast2D
 Node2D

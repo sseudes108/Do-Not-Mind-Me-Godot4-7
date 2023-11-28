@@ -7,7 +7,8 @@ func _ready():
 	pass 
 
 func _process(delta):
-	getInput()
+	if Engine.time_scale != 0:
+		getInput()
 	rotatePlayer()
 	move_and_slide()
 

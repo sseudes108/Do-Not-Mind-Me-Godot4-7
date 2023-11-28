@@ -12,4 +12,4 @@ func showExit():
 	monitoring = true
 
 func _on_body_entered(body):
-	print("Exited")
+	SignalManager.onExit.emit()

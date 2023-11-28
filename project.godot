@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Do Not Mind Me"
-run/main_scene="res://Project/LevelMap/LevelMap.tscn"
+run/main_scene="res://Project/Main/Main.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://Assets/images/survivor1_gun.png"
 
@@ -19,6 +19,7 @@ config/icon="res://Assets/images/survivor1_gun.png"
 
 SignalManager="*res://Project/Singletons/SignalManager.gd"
 SoundManager="*res://Project/Singletons/SoundManager.gd"
+GameManager="*res://Project/Singletons/GameManager.gd"
 
 [display]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dv2ceylnwiga8"]
+[gd_scene load_steps=6 format=3 uid="uid://dv2ceylnwiga8"]
 
 [ext_resource type="Script" path="res://Project/GameUi/GameUi.gd" id="1_ejv6e"]
 
@@ -18,6 +18,12 @@ outline_color = Color(0.128906, 0.148438, 0.179688, 1)
 shadow_size = 11
 shadow_color = Color(0.12549, 0.0509804, 0.00392157, 0)
 
+[sub_resource type="LabelSettings" id="LabelSettings_lhicb"]
+font_size = 33
+
+[sub_resource type="LabelSettings" id="LabelSettings_ey0fl"]
+font_size = 42
+
 [node name="GameUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -29,10 +35,11 @@ script = ExtResource("1_ejv6e")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 102.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 27
 theme_override_constants/margin_top = 27
 theme_override_constants/margin_right = 27
@@ -50,7 +57,39 @@ label_settings = SubResource("LabelSettings_f6u33")
 [node name="ExitLabel" type="Label" parent="MarginContainer/HB"]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 10
 text = "Go to Exit!"
 label_settings = SubResource("LabelSettings_adbul")
 horizontal_alignment = 2
+
+[node name="TimeLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+size_flags_stretch_ratio = 6.02
+text = "Time - 00:00"
+label_settings = SubResource("LabelSettings_lhicb")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="GameOver" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12549, 0.180392, 0.219608, 0.847059)
+
+[node name="GameOverLabel" type="Label" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "You lose. Took xxx seconds."
+label_settings = SubResource("LabelSettings_ey0fl")
+horizontal_alignment = 1
+vertical_alignment = 1

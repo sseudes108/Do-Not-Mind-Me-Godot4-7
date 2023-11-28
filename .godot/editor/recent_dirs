@@ -1,9 +1,10 @@
+res://Project/Main
+res://Project/Singletons
 res://Project/Exit
 res://Project/GameUi
 res://Project/PickUp
 res://Assets/spritesheets
 res://Project/Explosion
-res://Project/Singletons
 res://Project/Bullet
 res://Project/Player
 res://Project/Waypoint
