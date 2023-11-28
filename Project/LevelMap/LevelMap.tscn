@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b2ke42e2ekefx"]
+[gd_scene load_steps=18 format=3 uid="uid://b2ke42e2ekefx"]
 
 [ext_resource type="Texture2D" uid="uid://ci67u6lc25ksk" path="res://Assets/spritesheets/grass.png" id="1_h5rsb"]
 [ext_resource type="Script" path="res://Project/LevelMap/LevelMap.gd" id="1_m17yy"]
@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://cl7av4t3pskkw" path="res://Project/NPC/npc.tscn" id="5_ife6f"]
 [ext_resource type="PackedScene" uid="uid://c1fmfdns78y0y" path="res://Project/Player/Player.tscn" id="6_b21es"]
 [ext_resource type="PackedScene" uid="uid://bf1npb4047ryu" path="res://Project/Waypoint/waypoint.tscn" id="6_w47b0"]
+[ext_resource type="PackedScene" uid="uid://bb16o1hwkevyf" path="res://Project/PickUp/PickUp.tscn" id="9_ymxd6"]
+[ext_resource type="PackedScene" uid="uid://dv2ceylnwiga8" path="res://Project/GameUi/GameUi.tscn" id="10_ypeks"]
+[ext_resource type="PackedScene" uid="uid://dc1p0aoeapkdi" path="res://Project/Exit/Exit.tscn" id="11_g5upu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kjb6c"]
 texture = ExtResource("1_h5rsb")
@@ -308,7 +311,12 @@ position = Vector2(681, 438)
 patrolPoints = NodePath("../PatrolPaths/Path1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 position = Vector2(670, 435)
+limit_left = 0
+limit_top = 0
+limit_right = 2700
+limit_bottom = 1400
 
 [node name="ColorRect" type="ColorRect" parent="Camera2D"]
 offset_left = -503.0
@@ -346,3 +354,22 @@ position = Vector2(392, 750)
 
 [node name="Waypoint4" parent="PatrolPaths/Path1" instance=ExtResource("6_w47b0")]
 position = Vector2(377, 482)
+
+[node name="PickUp" parent="." instance=ExtResource("9_ymxd6")]
+position = Vector2(503, 409)
+
+[node name="PickUp2" parent="." instance=ExtResource("9_ymxd6")]
+position = Vector2(378, 639)
+
+[node name="PickUp3" parent="." instance=ExtResource("9_ymxd6")]
+position = Vector2(226, 573)
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameUI" parent="CanvasLayer" instance=ExtResource("10_ypeks")]
+
+[node name="Exit" parent="." instance=ExtResource("11_g5upu")]
+visible = false
+position = Vector2(164, 727)

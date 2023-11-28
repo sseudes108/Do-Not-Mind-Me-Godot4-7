@@ -18,14 +18,19 @@ const POWERUPS = [
 	preload("res://assets/sounds/Positive Sounds/sfx_sounds_powerup9.wav")
 ]
 
+const LASER = [
+	preload("res://assets/sounds/sfx_wpn_laser2.wav")
+]
+
 func getRandomSoundFromList(sound_list):
 	return sound_list.pick_random()
 
-func playGasp(player: AudioStreamPlayer2D):
-	player.stream = getRandomSoundFromList(GASPS)
+func playSoundFx(player: AudioStreamPlayer2D, key: int):
+	match key:
+		1:
+			player.stream = getRandomSoundFromList(GASPS)
+		2:
+			player.stream = getRandomSoundFromList(POWERUPS)
+		3:
+			player.stream = getRandomSoundFromList(LASER)
 	player.play()
-
-func playPowerup(player: AudioStreamPlayer2D):
-	player.stream = getRandomSoundFromList(POWERUPS)
-	player.play()
-	

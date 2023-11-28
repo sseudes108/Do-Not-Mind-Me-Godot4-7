@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://dv2ceylnwiga8"]
+
+[ext_resource type="Script" path="res://Project/GameUi/GameUi.gd" id="1_ejv6e"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_f6u33"]
+font_size = 33
+font_color = Color(0.12549, 0, 0.431373, 1)
+outline_size = 8
+outline_color = Color(0.128906, 0.148438, 0.179688, 1)
+shadow_size = 11
+shadow_color = Color(0.12549, 0.0509804, 0.00392157, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_adbul"]
+font_size = 42
+font_color = Color(0.776471, 0.796078, 1, 1)
+outline_size = 8
+outline_color = Color(0.128906, 0.148438, 0.179688, 1)
+shadow_size = 11
+shadow_color = Color(0.12549, 0.0509804, 0.00392157, 0)
+
+[node name="GameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ejv6e")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 102.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 27
+theme_override_constants/margin_top = 27
+theme_override_constants/margin_right = 27
+theme_override_constants/margin_bottom = 27
+
+[node name="HB" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer/HB"]
+layout_mode = 2
+text = "0/0"
+label_settings = SubResource("LabelSettings_f6u33")
+
+[node name="ExitLabel" type="Label" parent="MarginContainer/HB"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Go to Exit!"
+label_settings = SubResource("LabelSettings_adbul")
+horizontal_alignment = 2

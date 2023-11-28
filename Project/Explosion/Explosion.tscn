@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=3 uid="uid://dyvxtwtcwb3r6"]
+
+[ext_resource type="AudioStream" uid="uid://d32ammj7ga67f" path="res://Assets/sounds/sfx_exp_medium4.wav" id="1_7u6gc"]
+[ext_resource type="Texture2D" uid="uid://p2uhjho3dk3v" path="res://Assets/spritesheets/EXPLOSION_ANIMATION.png" id="1_x4p4e"]
+[ext_resource type="Script" path="res://Project/Explosion/Explosion.gd" id="2_fhexg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4o4j"]
+atlas = ExtResource("1_x4p4e")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xq43"]
+atlas = ExtResource("1_x4p4e")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qx1oj"]
+atlas = ExtResource("1_x4p4e")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj588"]
+atlas = ExtResource("1_x4p4e")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8as6e"]
+atlas = ExtResource("1_x4p4e")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8cv8l"]
+atlas = ExtResource("1_x4p4e")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e60a2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4o4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4xq43")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qx1oj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gj588")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8as6e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8cv8l")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="Explosion" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_e60a2")
+autoplay = "default"
+script = ExtResource("2_fhexg")
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_7u6gc")
+autoplay = true
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
+[connection signal="finished" from="Sound" to="." method="_on_sound_finished"]

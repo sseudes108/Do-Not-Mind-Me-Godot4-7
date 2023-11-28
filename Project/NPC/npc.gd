@@ -131,7 +131,7 @@ func setState(newState: ENEMY_STATE):
 		return
 	
 	if state != ENEMY_STATE.SEARCHING and newState == ENEMY_STATE.CHASING:
-		SoundManager.playGasp(sound)
+		SoundManager.playSoundFx(sound,1)
 	
 	state = newState
 	match state:
@@ -165,6 +165,7 @@ func shoot():
 	var bullet = bulletScene.instantiate()
 	bullet.init(player.global_position, global_position)
 	get_tree().root.add_child(bullet)
+	SoundManager.playSoundFx(sound,3)
 
 func _on_shoot_timeout():
 	shoot()
