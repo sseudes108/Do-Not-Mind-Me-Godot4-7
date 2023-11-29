@@ -22,7 +22,7 @@ func _process(delta):
 	camera.global_position = player.global_position
 	gameUi.updatePickUpsCount(collected,pickUps)
 	if Input.is_key_pressed(KEY_ESCAPE) == true:
-		GameManager.loadLMainScene()
+		GameManager.loadMainScene()
 
 func updateDebugLabel(text: String):
 	debugLabel.text = text

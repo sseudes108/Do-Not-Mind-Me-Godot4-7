@@ -23,9 +23,12 @@ func createExplosion():
 	explosion.global_position = global_position
 	get_tree().root.add_child(explosion)
 	queue_free()
+	
 
 func _on_body_entered(body):
 	createExplosion()
+	if body.is_in_group("Player"):
+		SignalManager.onDeath.emit()
 
 func _on_life_timer_timeout():
 	createExplosion()
